@@ -10,8 +10,12 @@ COPY legal-styles.css /app/
 COPY terms.html /app/
 COPY privacy.html /app/
 
-# Copy Caddyfile
-COPY Caddyfile /etc/caddy/Caddyfile
+# Copy Caddyfile template and startup script
+COPY Caddyfile.template /etc/caddy/Caddyfile.template
+COPY start.sh /start.sh
+
+# Make startup script executable
+RUN chmod +x /start.sh
 
 # Railway uses dynamic PORT env variable
 ENV PORT=8080
@@ -19,5 +23,5 @@ ENV PORT=8080
 # Expose the port
 EXPOSE $PORT
 
-# Run Caddy
-CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+# Run startup script
+CMD ["/start.sh"]
