@@ -1,17 +1,23 @@
 FROM caddy:2-alpine
 
+# Set working directory
+WORKDIR /app
+
 # Copy website files
-COPY index.html /app/index.html
-COPY styles.css /app/styles.css
-COPY legal-styles.css /app/legal-styles.css
-COPY terms.html /app/terms.html
-COPY privacy.html /app/privacy.html
+COPY index.html /app/
+COPY styles.css /app/
+COPY legal-styles.css /app/
+COPY terms.html /app/
+COPY privacy.html /app/
 
 # Copy Caddyfile
 COPY Caddyfile /etc/caddy/Caddyfile
 
-# Expose port 8080 (Railway default)
-EXPOSE 8080
+# Railway uses dynamic PORT env variable
+ENV PORT=8080
 
-# Caddy will automatically use the Caddyfile
-CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
+# Expose the port
+EXPOSE $PORT
+
+# Run Caddy
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
