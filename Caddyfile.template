@@ -3,7 +3,7 @@
     admin off
 }
 
-:{{PORT}} {
+0.0.0.0:{{PORT}} {
     root * /app
     file_server
     encode gzip
@@ -17,5 +17,10 @@
         X-Frame-Options "DENY"
         X-XSS-Protection "1; mode=block"
         Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    log {
+        output stdout
+        format console
     }
 }
