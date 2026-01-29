@@ -302,19 +302,78 @@ p {
     padding: 6rem 0;
 }
 
-.conditions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+.conditions-accordion {
+    max-width: 900px;
+    margin: 0 auto;
     margin-top: 4rem;
 }
 
-.condition-item {
-    padding: 1rem;
-    background-color: #e8f0f5;
+.accordion-item {
+    margin-bottom: 1rem;
+    border: 1px solid #e5e5e5;
     border-radius: 8px;
-    text-align: center;
-    font-weight: 500;
+    overflow: hidden;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+    box-shadow: 0 4px 12px rgba(30, 58, 95, 0.08);
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    background-color: #e8f0f5;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e3a5f;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.accordion-header:hover {
+    background-color: #d8e5f0;
+}
+
+.accordion-item.active .accordion-header {
+    background-color: #1e3a5f;
+    color: white;
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-item.active .accordion-header .accordion-icon {
+    stroke: white;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 500px;
+}
+
+.accordion-content p {
+    padding: 1.5rem 2rem;
+    color: #4a4a4a;
+    line-height: 1.8;
+    margin: 0;
 }
 
 /* Location Section */
