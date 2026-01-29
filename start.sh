@@ -3,8 +3,11 @@
 # Debug: Show PORT value
 echo "Railway PORT: ${PORT}"
 
-# Replace {{PORT}} with actual PORT value in Caddyfile
-sed "s/{{PORT}}/${PORT:-8080}/g" /etc/caddy/Caddyfile.template > /etc/caddy/Caddyfile
+# Export PORT for Caddy to use
+export PORT=${PORT:-8080}
+
+# Copy template to final location (no sed needed, using env var)
+cp /etc/caddy/Caddyfile.template /etc/caddy/Caddyfile
 
 # Debug: Show generated Caddyfile
 echo "Generated Caddyfile:"

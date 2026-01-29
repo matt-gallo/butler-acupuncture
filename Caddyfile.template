@@ -3,13 +3,14 @@
     admin off
 }
 
-0.0.0.0:{{PORT}} {
+:{$PORT:8080} {
+    bind 0.0.0.0
     root * /app
-    file_server
     encode gzip
+    file_server
 
     # Handle clean URLs
-    try_files {path} {path}.html {path}/ =404
+    try_files {path} {path}.html {path}/index.html
 
     # Security headers
     header {
